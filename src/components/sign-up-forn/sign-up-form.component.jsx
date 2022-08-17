@@ -46,6 +46,7 @@ const SignUpForm = () => {
       console.log(displayName);
       await createUserDocumentFromAuth(user, { displayName });
       resetFormFields();
+      alert("registration was successful");
     } catch (error) {
       console.log("user creation failed", error);
     }
