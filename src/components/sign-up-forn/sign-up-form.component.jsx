@@ -26,7 +26,6 @@ const SignUpForm = () => {
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    console.log(name, value);
 
     setFormFields({ ...formFields, [name]: value });
   };
@@ -43,10 +42,10 @@ const SignUpForm = () => {
         email,
         password
       );
-      console.log(displayName);
       await createUserDocumentFromAuth(user, { displayName });
       resetFormFields();
       alert("registration was successful");
+      //Login happens in user context
     } catch (error) {
       console.log("user creation failed", error);
     }
