@@ -2,13 +2,19 @@ import "./navigation.styles.scss";
 import { Outlet, Link } from "react-router-dom";
 import { Fragment, useContext } from "react";
 import { UserContext } from "../../contexts/user.context";
+import { CartContext } from "../../contexts/cart.context";
 import { ReactComponent as CrwnLogo } from "../../assets/crown.svg";
-
+import CartIcon from "../../components/cart-icon/cart-icon.component";
+import CartDropdown from "../../components/cart-dropdown/cart-dropdown.component";
 import { signOutUser } from "../../utils/firebase/firebase.utils";
 
 const Navigation = () => {
   const { currentUser } = useContext(UserContext);
-  console.log("navigation", currentUser);
+  const { isCartOpen, setIsCartOpen } = useContext(CartContext);
+
+  const handleCartIconClick = () => {
+    setIsCartOpen(!isCartOpen);
+  };
 
   return (
     <Fragment>
@@ -29,7 +35,9 @@ const Navigation = () => {
               SIGN IN
             </Link>
           )}
+          <CartIcon onClick={handleCartIconClick} />
         </div>
+        {isCartOpen && <CartDropdown />}
       </div>
       <Outlet />
     </Fragment>
